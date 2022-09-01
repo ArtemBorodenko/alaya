@@ -1,0 +1,39 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: alaya-web
+  labels:
+    app : alaya-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      project: alaya
+  template:
+    metadata:
+      labels:
+        project: alaya
+    spec:
+      containers:
+        - name : alaya-web
+          image: artemborodenko/alaya:latest
+          ports:
+            - containerPort: 8000
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-single-pod-service
+  labels:
+    env  : prod
+    owner: ArtemBorodenko
+spec:
+  selector:
+    project: alaya    # Selecting PODS with those Labels
+  ports:
+    - name      : app-listener
+      protocol  : TCP
+      port      : 8000  # Port on Load Balancer
+      targetPort: 8000  # Port on POD
+  type: LoadBalancer

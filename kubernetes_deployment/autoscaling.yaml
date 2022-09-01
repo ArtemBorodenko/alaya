@@ -1,0 +1,44 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: alaya-autoscaling
+  labels:
+    app  : alaya
+    env  : prod
+    owner: ArtemBorodenko
+spec:
+  selector:
+    matchLabels:
+      project: alaya
+  template:
+    metadata:
+      labels:
+        project: alaya
+    spec:
+      containers:
+        - name : alaya-web
+          image: artemborodenko/alaya:latest
+          ports:
+            - containerPort: 80
+
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: my-autoscaling
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v2
+    kind: Deployment
+    name: alaya-autoscaling
+  minReplicas: 2
+  maxReplicas: 6
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      targetAverageUtilization: 70
+  - type: Resource
+    resource:
+      name: memory
+      targetAverageUtilization: 80

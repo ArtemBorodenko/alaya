@@ -1,0 +1,20 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: alaya-deployment
+  labels:
+    app : my-k8s-application
+spec:
+  selector:
+    matchLabels:
+      project: alaya
+  template:
+    metadata:
+      labels:
+        project: alaya
+    spec:
+      containers:
+        - name : alaya-web
+          image: artemborodenko/alaya:latest
+          ports:
+            - containerPort: 8000

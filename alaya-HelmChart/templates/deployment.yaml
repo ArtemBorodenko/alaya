@@ -1,12 +1,11 @@
 apiVersion : apps/v1
 kind: Deployment
 metadata:
-  name: alya-deployment
-  namespace: alaya-namespace
+  name: {{ .Release.Name }}-deployment
   labels:
-    app : my-k8s-application
+    app : {{ .Release.Name }}-deployment
 spec:
-  replicas: 2
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
       project: alaya
@@ -16,7 +15,7 @@ spec:
         project: alaya
     spec:
       containers:
-        - name : alaya-web
-          image: artemborodenko/alaya:latest
+        - name : {{ .Release.Name }}-web
+          image: {{ .Values.container.image }}
           ports:
             - containerPort: 8000

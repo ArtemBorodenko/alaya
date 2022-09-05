@@ -1,23 +1,24 @@
 apiVersion : apps/v1
 kind: Deployment
 metadata:
-  name: alaya-deployment-replicas
+  name: alya-replicas
+  namespace: alaya-namespace
   labels:
     app : my-k8s-application
     env : prod
-    owner : ArtemBorodenko
+    owner: ArtemBorodenko
 spec:
   replicas: 3
   selector:
     matchLabels:
-      project: alaya
+      project: alay
   template:
     metadata:
       labels:
-        project: alaya
+        project: alay
     spec:
       containers:
-        - name : alaya-web
+        - name : alay-web
           image: artemborodenko/alaya:latest
           ports:
             - containerPort: 8000

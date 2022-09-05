@@ -1,8 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: app-pod-service
-  namespace: alaya-namespace
+  name: {{ .Release.Name }}
   labels:
     env: prod
     owner: ArtemBorodenko
@@ -10,9 +9,9 @@ metadata:
 
 spec:
   selector:
-    project: k8s-app
+    project: {{ .Release.Name }}
   ports:
-    - name: k8s-app-listener
+    - name: {{ .Release.Name }}-listener
       protocol: TCP
       port: 8000
       targetPort: 8000

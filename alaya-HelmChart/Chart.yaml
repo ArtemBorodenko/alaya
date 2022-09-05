@@ -1,0 +1,11 @@
+apiVersion: v2
+name: alaya-Helmchart
+description: Helm chart for Kubernetes
+Type: application
+version: 0.1.0
+appVersion: "1.0.0"
+
+
+mainteiners:
+  - name: ArtemBorodenko
+    email: lala@paradise.com

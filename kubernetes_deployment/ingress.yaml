@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Ingress
+metadata:
+  name: alaya-ingress
+  namespace: alaya-namespace
+  labels:
+  env: dev
+  owner: ArtemBorodenko
+
+spec:
+  rules:
+  - host: alaya.com
+    http:
+      paths:
+      - path: "/healtcheck"
+        backend:
+          serviceName: alaya-web
+          servicePort: 8000

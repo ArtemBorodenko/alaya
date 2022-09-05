@@ -1,20 +1,16 @@
 FROM python:alpine3.15
+MAINTAINER artemborodenko
 
 ENV PYTHONUNBUFFERED 1
 
 EXPOSE 8000
 
-RUN mkdir /app
+COPY ./requirements.txt /requirements.txt
+RUN pip install -r /requirements.txt
 
-WORKDIR /app
-
-COPY ./requirements.txt /app/requirements.txt
-
-RUN pip3 install -r requirements.txt
-
-COPY . /app
+RUN mkdir /alaya
+WORKDIR /alaya
+COPY ./alaya /alaya
+COPY ./kubernetes_deployment /alaya
 
 CMD [ "python3", "/alaya/manage.py", "runserver", "0.0.0.0:8000", "--settings=alaya.settings"]
-
-
-

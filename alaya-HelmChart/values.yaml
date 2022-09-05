@@ -1,0 +1,6 @@
+
+
+  container:
+    image: artemborodenko/alaya:latest  
+
+  replicaCount: 2

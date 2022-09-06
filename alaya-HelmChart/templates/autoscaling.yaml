@@ -1,25 +1,25 @@
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: my-autoscaling
-  namespace: alaya-namespace
+  name: {{ .Release.Name }}-autoscaling
+  namespace: {{ .Values.nm }}
 spec:
   scaleTargetRef:
     apiVersion: apps/v2
     kind: Deployment
     name: alaya-web-autoscaling
-  minReplicas: 2
-  maxReplicas: 6
+  minReplicas: {{ .Values.min.ReplicasCount }}
+  maxReplicas: {{ .Values.max.ReplicasCount }}
   metrics:
   - type: Resource
     resource:
       name: cpu
       target:
         type: Utilization
-        averageUtilization: 70
+        averageUtilization: {{ .Values.autoscaling.targetcputilizationPercentage }}
   - type: Resource
     resource:
       name: memory
       target:
         type: Utilization
-        averageUtilization: 80
+        averageUtilization: {{ .Values.autoscaling.targetmemorytilizationPercentage }}

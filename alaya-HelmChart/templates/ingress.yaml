@@ -1,8 +1,8 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: alaya-ingress
-  namespace: alaya-namespace
+  name: {{ .Release.name}}-ingress
+  namespace: {{ .Values.nm}}
   labels:
     env: dev
     owner: ArtemBorodenko
@@ -16,6 +16,6 @@ spec:
           path: "/healtcheck"
           backend:
             service:
-              name: alaya-web
+              name: {{ .Release.name}}-web
               port:
                number: 8000

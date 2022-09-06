@@ -2,6 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: {{ .Release.Name }}
+  namespace: {{ .Values.nm }}
   labels:
     env: prod
     owner: ArtemBorodenko

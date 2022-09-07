@@ -14,3 +14,5 @@ COPY ./alaya /alaya
 COPY ./kubernetes_deployment /alaya
 
 CMD [ "python3", "/alaya/manage.py", "runserver", "0.0.0.0:8000", "--settings=alaya.settings"]
+
+HEALTHCHECK CMD curl --fail http://localhost:8000/healthcheck || exit 1

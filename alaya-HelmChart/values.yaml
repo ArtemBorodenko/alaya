@@ -1,7 +1,7 @@
 # Default values for WebServer_Helm
 #Container settings
 containers:
-  name: alaweb
+  name: alaya
   image: artemborodenko/alaya:latest
   ports: 8000
 

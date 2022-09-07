@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Release.Name }}
+  name: app-pod-service
   namespace: {{ .Values.nm }}
   labels:
     env: prod
@@ -12,8 +12,8 @@ spec:
   selector:
     project: ala
   ports:
-    - name: {{ .Release.Name }}-listener
+    - name: k8s-app-listener
       protocol: TCP
-      port: 8000
-      targetPort: 8000
+      port: {{ .Values.svc_port }}
+      targetPort: {{ .Values.svc_target_port }}
   type: ClusterIP

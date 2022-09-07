@@ -16,7 +16,7 @@ spec:
       port:
         number: 8000
   rules:
-  - host: alaya.com
+  - host: alaya133.com
     http:
       paths:
         - pathType: Prefix

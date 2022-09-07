@@ -10,7 +10,7 @@ metadata:
 
 spec:
   selector:
-    project: k8s-app
+    project: ala
   ports:
     - name: k8s-app-listener
       protocol: TCP

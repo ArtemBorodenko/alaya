@@ -5,21 +5,21 @@ metadata:
   namespace: {{ .Values.nm }}
 spec:
   scaleTargetRef:
-    apiVersion: apps/v2
+    apiVersion: apps/v2beta1v1
     kind: Deployment
-    name: alaya-web-autoscaling
-  minReplicas: {{ .Values.min.ReplicasCount }}
-  maxReplicas: {{ .Values.max.ReplicasCount }}
+    name: {{ .Release.Name }}-deployment
+  minReplicas: {{ .Values.autoscaling.minReplicas }}
+  maxReplicas: {{ .Values.autoscaling.maxReplicas }}
   metrics:
   - type: Resource
     resource:
       name: cpu
       target:
         type: Utilization
-        averageUtilization: {{ .Values.autoscaling.targetcputilizationPercentage }}
+        averageUtilization: 70
   - type: Resource
     resource:
       name: memory
       target:
         type: Utilization
-        averageUtilization: {{ .Values.autoscaling.targetmemorytilizationPercentage }}
+        averageUtilization: 70

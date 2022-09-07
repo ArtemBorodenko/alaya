@@ -1,21 +1,28 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: {{ .Release.name}}-ingress
-  namespace: {{ .Values.nm}}
+  name: {{ .Release.name }}ing
+  namespace: {{ .Values.nm }}
+  annotations:
+      kubernetes.io/ingress.class: nginx
   labels:
     env: dev
     owner: ArtemBorodenko
 
 spec:
+  defaultBackend:
+    service:
+      name: {{ .Release.Name }}
+      port:
+        number: 8000
   rules:
   - host: alaya.com
     http:
       paths:
         - pathType: Prefix
-          path: "/healtcheck"
+          path: "/healthcheck"
           backend:
             service:
-              name: {{ .Release.name}}-web
+              name: {{ .Release.name }}web
               port:
                number: 8000

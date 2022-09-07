@@ -11,14 +11,14 @@ spec:
   replicas: 3
   selector:
     matchLabels:
-      project: alay
+      project: ala
   template:
     metadata:
       labels:
-        project: alay
+        project: ala
     spec:
       containers:
-        - name : alay-web
+        - name : ala-web
           image: artemborodenko/alaya:latest
           ports:
             - containerPort: 8000

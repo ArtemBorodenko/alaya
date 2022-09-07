@@ -2,20 +2,21 @@ apiVersion : apps/v1
 kind: Deployment
 metadata:
   name: {{ .Release.Name }}-deployment
+  namespace: {{ .Values.nm }}
   labels:
     app : {{ .Release.Name }}-deployment
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      project: alaya
+      project: ala
   template:
     metadata:
       labels:
-        project: alaya
+        project: ala
     spec:
       containers:
-        - name : {{ .Release.Name }}-web
-          image: {{ .Values.container.image }}
+        - name : {{ .Values.containers.name }}-{{ .Release.Name }}
+          image: {{ .Values.containers.image }}
           ports:
             - containerPort: 8000

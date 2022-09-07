@@ -1,25 +1,24 @@
-apiVersion: autoscaling/v2
-kind: HorizontalPodAutoscaler
+apiVersion : apps/v1
+kind: Deployment
 metadata:
-  name: my-autoscaling
+  name: alya-deployment
   namespace: alaya-namespace
+  labels:
+    app : my-k8s-application
+    env : prod
+    owner: ArtemBorodenko
 spec:
-  scaleTargetRef:
-    apiVersion: apps/v2
-    kind: Deployment
-    name: alaya-web-autoscaling
-  minReplicas: 2
-  maxReplicas: 6
-  metrics:
-  - type: Resource
-    resource:
-      name: cpu
-      target:
-        type: Utilization
-        averageUtilization: 70
-  - type: Resource
-    resource:
-      name: memory
-      target:
-        type: Utilization
-        averageUtilization: 80
+  replicas: 2
+  selector:
+    matchLabels:
+      project: ala
+  template:
+    metadata:
+      labels:
+        project: ala
+    spec:
+      containers:
+        - name : ala-web
+          image: artemborodenko/alaya:latest
+          ports:
+            - containerPort: 8000

@@ -10,7 +10,7 @@ metadata:
 
 spec:
   selector:
-    project: {{ .Release.Name }}
+    project: ala
   ports:
     - name: {{ .Release.Name }}-listener
       protocol: TCP

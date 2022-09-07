@@ -55,7 +55,7 @@ jobs:
             $HasDiff = $SourceDiff.Length -gt 0
             # Set the output named "helm_file_changed"
             
-            Write-Host "::set-output name=helm_file_changed::$HasDiff
+            Write-Host "::set-output name=helm_file_changed::$HasDiff"
   build_push:
 
     runs-on: ubuntu-latest
